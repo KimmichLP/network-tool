@@ -27,9 +27,13 @@ def port_skanning():    #Funksjon for port skanning
     sock.close()
 
 def ping_test():        #Funksjon for å pinge en server/port
+    #TO DO:
+    # - Gjøre mer research på Socket Lib
     print("Nice 2")
-
+    
 def dos_monitor():      #Funksjon for DoS monitorering
+    #TO DO:
+    # - Gjøre mer research på Socket Lib
     print("Nice 3")
 
 def main():  
