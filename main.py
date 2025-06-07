@@ -1,15 +1,30 @@
 import socket           #Hente socket biblotek
 
 HOST = "127.0.0.1"
-PORT = 69696 
-
-
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:    #Setter AF._INET for IPv4 og SOCK_STREAM for TCP 
-    pass
-
 
 def port_skanning():    #Funksjon for port skanning
-    print("Nice 1")
+    start_port = int(input("Startport (0-65535): "))
+    ende_port = int(input("Endeport (0-65535): "))
+    
+    if start_port < 0 or start_port > ende_port or ende_port > 65535:
+        print("Ugyldig portområde! Velg port mellom 0-65535")
+        return
+    
+    print(f"Sjekker porter fra {start_port} til {ende_port}...")
+
+    for port in range(start_port, ende_port + 1):
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)    #Setter AF._INET for IPv4 og SOCK_STREAM for TCP 
+            sock.settimeout(1)  #Delay på 1 sekund
+            result = sock.connect_ex((HOST, port))                      #Kobler til og returnerer feilkode uten å kræsje
+
+            if result == 0:
+                 print(f"[ÅPEN] port {port} på {HOST}")
+            else:
+                 print(f"[STENGT] port {port} på {HOST}")
+
+            sock.close()
+    
+    sock.close()
 
 def ping_test():        #Funksjon for å pinge en server/port
     print("Nice 2")
